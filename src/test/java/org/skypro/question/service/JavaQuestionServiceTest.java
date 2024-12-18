@@ -6,10 +6,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 import org.skypro.question.domain.Question;
+import org.skypro.question.repository.JavaQuestionRepository;
 
 class JavaQuestionServiceTest {
 
-    private final JavaQuestionService out = new JavaQuestionService();
+    private final JavaQuestionService out = new JavaQuestionService(new JavaQuestionRepository());
     private final String question = "question";
     private final String answer = "answer";
 

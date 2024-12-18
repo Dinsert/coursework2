@@ -9,20 +9,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
 
-    private final QuestionService questionService;
+    private final JavaQuestionService javaQuestionService;
+    private final MathQuestionService mathQuestionService;
 
-    public ExaminerServiceImpl(QuestionService questionService) {
-        this.questionService = questionService;
+    public ExaminerServiceImpl(JavaQuestionService javaQuestionService, MathQuestionService mathQuestionService) {
+        this.javaQuestionService = javaQuestionService;
+        this.mathQuestionService = mathQuestionService;
     }
 
     @Override
     public Collection<Question> getQuestions(int amount) {
-        if (amount > questionService.getAll().size()) {
+        if (amount > javaQuestionService.getAll().size() + mathQuestionService.getAll().size()) {
             throw new QuestionsOverflowException("Запрошено больше вопросов, чем есть в сервисе");
         }
         Collection<Question> result = new HashSet<>();
-        while (amount != result.size()) {
-            result.add(questionService.getRandomQuestion());
+        int count = 0;
+        while (amount != count) {
+            if (result.add(javaQuestionService.getRandomQuestion())) {
+                count++;
+            }
+            if (result.add(mathQuestionService.getRandomQuestion())) {
+                count++;
+            }
         }
         return result;
     }
