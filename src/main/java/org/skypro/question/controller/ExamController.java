@@ -6,6 +6,7 @@ import org.skypro.question.service.ExaminerService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/exam")
@@ -19,7 +20,7 @@ public class ExamController {
     }
 
     @GetMapping("/get/{amount}")
-    public Collection<Question> getQuestions(@PathVariable int amount) {
-        return examinerService.getQuestions(amount);
+    public Collection<Question> getQuestions(@PathVariable int amount, @RequestParam(required = false) String exam) {
+        return examinerService.getQuestions(amount, exam);
     }
 }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.skypro.question.domain.Question;
 import org.skypro.question.repository.JavaQuestionRepository;
@@ -13,6 +14,15 @@ class JavaQuestionServiceTest {
     private final JavaQuestionService out = new JavaQuestionService(new JavaQuestionRepository());
     private final String question = "question";
     private final String answer = "answer";
+
+    @Test
+    void unsuccessfulAdditionIdenticalQuestions() {
+        out.add(question, answer);
+        out.add(question, answer);
+        Collection<Question> actual = out.getAll();
+        Collection<Question> excepted = new HashSet<>(List.of(new Question(question, answer)));
+        assertEquals(excepted, actual);
+    }
 
     @Test
     void shouldReturnQuestionAtAdd() {

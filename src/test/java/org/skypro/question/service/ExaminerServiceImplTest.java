@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,28 +14,43 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.skypro.question.domain.Question;
 import org.skypro.question.exception.QuestionsOverflowException;
+import org.skypro.question.repository.JavaQuestionRepository;
+import org.skypro.question.repository.MathQuestionRepository;
 
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiceImplTest {
 
     @Mock
-    private QuestionService questionMock;
-    @InjectMocks
+    private JavaQuestionRepository javaQuestionRepositoryMock;
+    @Mock
+    private MathQuestionRepository mathQuestionRepositoryMock;
+    @Mock
+    private JavaQuestionService javaQuestionMock;
+    @Mock
+    private MathQuestionService mathQuestionMock;
     private ExaminerServiceImpl out;
-    private final Collection<Question> questions = new HashSet<>(List.of(
-            new Question("question1", "answer1"),
-            new Question("question2", "answer2"),
-            new Question("question3", "answer3"),
-            new Question("question4", "answer4"),
-            new Question("question5", "answer5")));
+    private Collection<Question> questions;
+
+    @BeforeEach
+    void setUp() {
+        javaQuestionMock = new JavaQuestionService(javaQuestionRepositoryMock);
+        mathQuestionMock = new MathQuestionService(mathQuestionRepositoryMock);
+        out = new ExaminerServiceImpl(javaQuestionMock, mathQuestionMock);
+        questions = new HashSet<>(List.of(
+                new Question("question1", "answer1"),
+                new Question("question2", "answer2"),
+                new Question("question3", "answer3"),
+                new Question("question4", "answer4"),
+                new Question("question5", "answer5")));
+    }
 
     @Test
     void getQuestions() {
-        when(questionMock.getAll()).thenReturn(questions);
-        when(questionMock.getRandomQuestion()).thenReturn(new Question("question1", "answer1"),
-                                                          new Question("question2", "answer2"),
-                                                          new Question("question3", "answer3"));
-        Collection<Question> actual = out.getQuestions(3);
+        when(javaQuestionRepositoryMock.getAll()).thenReturn(questions);
+        when(javaQuestionRepositoryMock.getRandomQuestion()).thenReturn(new Question("question1", "answer1"),
+                                                              new Question("question2", "answer2"),
+                                                              new Question("question3", "answer3"));
+        Collection<Question> actual = out.getQuestions(3, null);
         Collection<Question> expected = new HashSet<>(List.of(
                 new Question("question1", "answer1"),
                 new Question("question2", "answer2"),
@@ -44,7 +60,7 @@ class ExaminerServiceImplTest {
 
     @Test
     void shouldThrowQuestionsOverflowExceptionAtGetQuestions() {
-        when(questionMock.getAll()).thenReturn(questions);
-        assertThrows(QuestionsOverflowException.class, () -> out.getQuestions(6));
+        when(javaQuestionMock.getAll()).thenReturn(questions);
+        assertThrows(QuestionsOverflowException.class, () -> out.getQuestions(6, null));
     }
 }
