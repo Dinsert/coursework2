@@ -37,6 +37,14 @@ public class JavaQuestionService implements QuestionService {
     }
 
     @Override
+    public Question remove(Question question) {
+        if (questions.remove(question)) {
+            return question;
+        }
+        return null;
+    }
+
+    @Override
     public Question find(String question, String answer) {
         Question result = new Question(question, answer);
         if (questions.contains(result)) {

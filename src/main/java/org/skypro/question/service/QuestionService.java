@@ -9,6 +9,8 @@ public interface QuestionService {
 
     Question remove(String question, String answer);
 
+    Question remove(Question question);
+
     Question find(String question, String answer);
 
     Collection<Question> getAll();
