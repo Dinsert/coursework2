@@ -14,5 +14,4 @@ public interface QuestionRepository {
     Collection<Question> getAll();
 
     Question getRandomQuestion();
-
 }
