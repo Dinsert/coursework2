@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.skypro.question.domain.Question;
 
-class JavaQuestionRepositoryTest {
+class MathQuestionRepositoryTest {
 
-    private final JavaQuestionRepository out = new JavaQuestionRepository();
+    private final MathQuestionRepository out = new MathQuestionRepository();
     private final String question = "question";
     private final String answer = "answer";
 
