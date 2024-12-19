@@ -51,16 +51,19 @@ class ExaminerServiceImplTest {
         when(javaQuestionRepositoryMock.getAll()).thenReturn(questions);
         when(javaQuestionRepositoryMock.getRandomQuestion()).thenReturn(new Question("question1", "answer1"),
                                                                         new Question("question2", "answer2"),
-                                                                        new Question("question3", "answer3"));
+                                                                        new Question("question3", "answer3"),
+                                                                        new Question("question5", "answer5"),
+                                                                        new Question("question6", "answer6"));
         when(mathQuestionRepositoryMock.getAll()).thenReturn(questions);
-        when(mathQuestionRepositoryMock.getRandomQuestion()).thenReturn(new Question("question1", "answer1"),
-                                                                        new Question("question2", "answer2"),
-                                                                        new Question("question3", "answer3"));
-        Collection<Question> actual = out.getQuestions(3, null);
+        when(mathQuestionRepositoryMock.getRandomQuestion()).thenReturn(new Question("question4", "answer4"));
+        Collection<Question> actual = out.getQuestions(6, null);
         Collection<Question> expected = new HashSet<>(List.of(
                 new Question("question1", "answer1"),
                 new Question("question2", "answer2"),
-                new Question("question3", "answer3")));
+                new Question("question3", "answer3"),
+                new Question("question4", "answer4"),
+                new Question("question5", "answer5"),
+                new Question("question6", "answer6")));
         assertEquals(expected, actual);
     }
 

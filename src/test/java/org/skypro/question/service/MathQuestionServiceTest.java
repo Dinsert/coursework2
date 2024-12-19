@@ -12,15 +12,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.skypro.question.domain.Question;
-import org.skypro.question.repository.JavaQuestionRepository;
+import org.skypro.question.repository.MathQuestionRepository;
 
 @ExtendWith(MockitoExtension.class)
-class JavaQuestionServiceTest {
+class MathQuestionServiceTest {
 
     @Mock
-    private JavaQuestionRepository javaQuestionRepositoryMock;
+    private MathQuestionRepository mathQuestionRepositoryMock;
     @InjectMocks
-    private JavaQuestionService out;
+    private MathQuestionService out;
     private final String question = "question";
     private final String answer = "answer";
     private Collection<Question> questions = new HashSet<>(List.of(
@@ -32,7 +32,7 @@ class JavaQuestionServiceTest {
 
     @Test
     void add() {
-        when(javaQuestionRepositoryMock.add(question, answer)).thenReturn(new Question(question, answer));
+        when(mathQuestionRepositoryMock.add(question, answer)).thenReturn(new Question(question, answer));
         Question actual = out.add(question, answer);
         Question expected = new Question(question, answer);
         assertEquals(expected, actual);
@@ -40,7 +40,7 @@ class JavaQuestionServiceTest {
 
     @Test
     void remove() {
-        when(javaQuestionRepositoryMock.remove(question, answer)).thenReturn(new Question(question, answer));
+        when(mathQuestionRepositoryMock.remove(question, answer)).thenReturn(new Question(question, answer));
         Question actual = out.remove(question, answer);
         Question expected = new Question(question, answer);
         assertEquals(expected, actual);
@@ -48,7 +48,7 @@ class JavaQuestionServiceTest {
 
     @Test
     void find() {
-        when(javaQuestionRepositoryMock.find(question, answer)).thenReturn(new Question(question, answer));
+        when(mathQuestionRepositoryMock.find(question, answer)).thenReturn(new Question(question, answer));
         Question actual = out.find(question, answer);
         Question expected = new Question(question, answer);
         assertEquals(expected, actual);
@@ -56,7 +56,7 @@ class JavaQuestionServiceTest {
 
     @Test
     void getAll() {
-        when(javaQuestionRepositoryMock.getAll()).thenReturn(questions);
+        when(mathQuestionRepositoryMock.getAll()).thenReturn(questions);
         Collection<Question> actual = out.getAll();
         Collection<Question> expected = new HashSet<>(questions);
         assertEquals(expected, actual);
@@ -64,7 +64,7 @@ class JavaQuestionServiceTest {
 
     @Test
     void getRandomQuestion() {
-        when(javaQuestionRepositoryMock.getRandomQuestion()).thenReturn(new Question(question, answer));
+        when(mathQuestionRepositoryMock.getRandomQuestion()).thenReturn(new Question(question, answer));
         Question actual = out.getRandomQuestion();
         Question expected = new Question(question, answer);
         assertEquals(expected, actual);
