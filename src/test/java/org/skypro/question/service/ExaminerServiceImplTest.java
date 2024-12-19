@@ -14,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.skypro.question.domain.Question;
 import org.skypro.question.exception.QuestionsOverflowException;
 import org.skypro.question.repository.JavaQuestionRepository;
-import org.skypro.question.repository.MathQuestionRepository;
 
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiceImplTest {

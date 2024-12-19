@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.skypro.question.domain.Question;
-import org.skypro.question.repository.MathQuestionRepository;
 
 @ExtendWith(MockitoExtension.class)
 class MathQuestionServiceTest {

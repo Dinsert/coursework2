@@ -13,4 +13,10 @@ public class QuestionsExceptionHandler {
     public String handelQuestionsOverflow(QuestionsOverflowException e) {
         return e.getMessage();
     }
+
+    @ExceptionHandler(MethodNotAllowedException.class)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public String handelMethodNotAllowed(MethodNotAllowedException e) {
+        return e.getMessage();
+    }
 }
