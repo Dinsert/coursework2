@@ -24,7 +24,7 @@ class MathQuestionServiceTest {
     private MathQuestionService out;
     private final String question = "question";
     private final String answer = "answer";
-    private Collection<Question> questions =
+    private final Collection<Question> questions =
             new HashSet<>(List.of(new Question("question", "answer")));
 
     @Test
