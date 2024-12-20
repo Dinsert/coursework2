@@ -23,7 +23,7 @@ class JavaQuestionServiceTest {
     private JavaQuestionService out;
     private final String question = "question";
     private final String answer = "answer";
-    private Collection<Question> questions = new HashSet<>(List.of(
+    private final Collection<Question> questions = new HashSet<>(List.of(
             new Question("question1", "answer1"),
             new Question("question2", "answer2"),
             new Question("question3", "answer3"),
